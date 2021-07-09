@@ -80,7 +80,7 @@ export default function Projects({navigation}) {
       <Button title="Pick Image From Gallery" onPress={() => pickImage()} />
       <Button title="Save" onPress={() => navigation.navigate('Save', { image })} />
      </View>
-      {image && <Image source={{ uri: image }} style={styles.image} />}
+     {image && <Image source={{ uri: image }} style={styles.image} />}
     
     
     </View>

@@ -61,13 +61,19 @@ function save(props) {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: props.route.params.image }} />
+      <View style={styles.Imagecontainer}>
+      <Image source={{uri : props.route.params.image}} style = {styles.image} />
+      </View>
+
+      <View style={styles.Textcontainer}>
       <TextInput
+      style={{backgroundColor:'white'}}
         placeholder="Write the Project Name"
         onChangeText={(project) => setProject(project)}
+
       />
-    
       <Button title="Save" onPress={() => uploadImage()}/>
+      </View>
     </View>
   );
 }

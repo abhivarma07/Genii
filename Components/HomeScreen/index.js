@@ -17,6 +17,7 @@ import { bindActionCreators } from "redux";
 import { fetchUser, fetchUserPosts } from "../../redux/actions/index";
 
 import FeedScreen from "../Feed";
+import Navigator from "../Work/Windows/ScreenStack";
 import ProfileScreen from "../Profile";
 const Tab = createMaterialBottomTabNavigator();
 
@@ -84,7 +85,7 @@ export class Main extends Component {
           }}
         />
       </Tab.Navigator>
-      </SafeAreaView>
+     </SafeAreaView>
     );
   }
 }

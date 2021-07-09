@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
       image: {
         flex: 1,
         aspectRatio: 1 / 1,
+       
       },
 
       buttonContainer:{
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
       PInfo:{
         fontSize:25,
         fontWeight:"700",
-        width : "60%",
+        width : "100%",
         padding: 5,
         backgroundColor : "black",
         color : "white",
@@ -53,7 +54,9 @@ const styles = StyleSheet.create({
           fontWeight:"bold",
           alignSelf:"center",
           
-      }
+      },
+
+      
 
 
 });
