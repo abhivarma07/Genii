@@ -28,7 +28,7 @@ const firebaseConfig = {
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig)
 }
-
+//texting the github branching
 
 
 import { NavigationContainer } from '@react-navigation/native';
