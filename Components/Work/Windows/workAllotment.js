@@ -1,4 +1,6 @@
-import React from "react";
+import React , {useState , useEffect , Component} from "react";
+import firebase from "firebase";
+require("firebase/firestore");
 
 import {
   View,
@@ -40,17 +42,28 @@ const P_OPTIONS = [
   
 
 
-export default function Options({ navigation }) {
+export class Options extends Component {
+
+  componentDidMount(){
+    this.props.fetchUser();
+    this.props.fetchUserPosts();
+  };
+
+ 
+ render() {
   const pressProjectsOptionHandler = () => {
-    navigation.navigate("Project");
+    props.navigation.navigate("Project");
   };
 
   const pressComplaintOptionHandler = () => {
-    navigation.navigate("Complaint");
+    props.navigation.navigate("Complaint");
   };
 
   return (
     <View style={styles.BoxOption}>
+    <View>
+      <Text>{user.name}</Text>
+      </View>      
 
       <View style={styles.MainBoxOption}>
         <View style={styles.rowOne}>
@@ -87,7 +100,9 @@ export default function Options({ navigation }) {
       </View>
     </View>
   );
+};
 }
+
 
 const styles = StyleSheet.create({
   text: {
