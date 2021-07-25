@@ -1,4 +1,5 @@
 import React , {useState , useEffect , Component} from "react";
+import {LogBox} from "react-native" ;
 import firebase from "firebase";
 require("firebase/firestore");
 
@@ -11,6 +12,10 @@ import {
   Alert,
 } from "react-native";
 import SelectBox from "react-native-multi-selectbox";
+require("firebase/firestore");
+import { connect } from "react-redux";
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 
 const P_OPTIONS = [
@@ -42,15 +47,25 @@ const P_OPTIONS = [
   
 
 
-export class Options extends Component {
+export default function Work(props) {
 
-  componentDidMount(){
-    this.props.fetchUser();
-    this.props.fetchUserPosts();
-  };
+  const [user,setUser] = useState(props) ;
 
- 
- render() {
+  firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .get()
+          .then(snapshot => {
+            if(snapshot.exists)
+            {
+              setUser(snapshot.data())
+            }
+            else{
+              console.log('does not exist') ;
+            }
+          })
+
   const pressProjectsOptionHandler = () => {
     props.navigation.navigate("Project");
   };
@@ -60,11 +75,12 @@ export class Options extends Component {
   };
 
   return (
-    <View style={styles.BoxOption}>
-    <View>
-      <Text>{user.name}</Text>
-      </View>      
-
+    <View style={styles.BoxOption}>     
+        <View style={styles.Main}>
+        <Text style={styles.text}>
+          FROM : {user.name}
+        </Text>
+        </View>
       <View style={styles.MainBoxOption}>
         <View style={styles.rowOne}>
           <TouchableOpacity
@@ -100,16 +116,27 @@ export class Options extends Component {
       </View>
     </View>
   );
-};
 }
 
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+  posts: store.userState.posts,
+  following: store.userState.following,
+});
 
 const styles = StyleSheet.create({
   text: {
     flex: 1,
+    flexBasis: 1,
     fontSize: 20,
     padding: 10,
+    marginTop:20,
+    textAlign:"center",
+    justifyContent: "center",
     backgroundColor: "lightblue",
+    fontWeight: "bold",
+    width: "100%",
+    borderRadius: 60,
   },
   HeadBoxOption: {
     flex: 0.5,
@@ -119,6 +146,14 @@ const styles = StyleSheet.create({
     width: "100%",
     alignContent: "center",
   },
+
+  Main:{
+    flex: 1,
+    position: "absolute",
+    width: "100%",
+    marginTop:"2%"
+  },
+
   BoxOption: {
     alignSelf: "baseline",
     width: "100%",
@@ -138,6 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 20,
     marginTop:20,
+    textAlign:"center",
     justifyContent: "center",
     backgroundColor: "lightblue",
     fontWeight: "bold",
@@ -172,3 +208,4 @@ const styles = StyleSheet.create({
     bottom:-200,
   },
 });
+

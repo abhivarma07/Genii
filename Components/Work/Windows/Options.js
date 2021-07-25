@@ -1,5 +1,5 @@
 import React from "react";
-
+import firebase from "firebase" ;
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
 
 export default function Options({ navigation }) {
   const work = () => {
-    navigation.navigate("WorkAllotment");
+    navigation.navigate("WorkAllotment" , {uid: firebase.auth().currentUser.uid});
   };
 
   const pressComplaintOptionHandler = () => {
